@@ -1,5 +1,14 @@
 shinyServer(function(input, output,graphtype) {
 
+    train_shiny = read.csv('loan_visulization',sep = '/')
+    library(dplyr)
+    set.seed(49)
+    head(train_shiny)
+    str(train_shiny)
+    idx = sample(1:nrow(train_shiny),as.integer(nrow(train_shiny)*0.1),replace = FALSE)
+    sub_dat = train_shiny[idx,]
+    sub_dat = sub_dat %>% select(-one_of('X'))
+
 
     output$prediction <- renderPrint({
         
